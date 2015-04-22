@@ -366,11 +366,11 @@ class MainWin:
 			self.b11.set_label(str(int(self.b11.get_label().split("/")[0])+1)+"/"+self.b11.get_label().split("/")[1])
 			data[ans-1][2] = data[ans-1][2][1:]+"1"
 			self.e11.get_style_context().add_class("ok")
-			print "OK"
+			self.log("OK")
 		else:
 			data[ans-1][2] = data[ans-1][2][1:]+"0"
 			self.e11.get_style_context().add_class("error")
-			print "Eror"
+			self.log("Eror")
 		self.l12.set_text(data[ans-1][int(settings["revers_lang"])])
 		self.l13.set_text(data[ans-1][int(not settings["revers_lang"])])
 		self.l14.set_text(str(data[ans-1][2].count("1"))+"0%")
@@ -427,11 +427,11 @@ class MainWin:
 			self.b21.set_label(str(int(self.b21.get_label().split("/")[0])+1)+"/"+self.b21.get_label().split("/")[1])
 			data[ans-1][2] = data[ans-1][2][1:]+"1"
 			self.e21.get_style_context().add_class("ok")
-			print "OK"
+			self.log("OK")
 		else:
 			data[ans-1][2] = data[ans-1][2][1:]+"0"
 			self.e21.get_style_context().add_class("error")
-			print "Eror"
+			self.log("Eror")
 		self.l22.set_text(data[ans-1][not settings["revers_lang"]])
 		self.l23.set_text(data[ans-1][settings["revers_lang"]])
 		self.l24.set_text(str(data[ans-1][2].count("1"))+"0%")
