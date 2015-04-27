@@ -1,219 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkImage" id="i_new">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="tooltip_text" translatable="yes">New dict</property>
-    <property name="stock">gtk-new</property>
-  </object>
-  <object class="GtkImage" id="i_open">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="tooltip_text" translatable="yes">Open dict</property>
-    <property name="stock">gtk-open</property>
-  </object>
-  <object class="GtkImage" id="i_play">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="tooltip_text" translatable="yes">Play/Stop play</property>
-    <property name="stock">gtk-media-play</property>
-  </object>
-  <object class="GtkImage" id="i_plus">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-add</property>
-  </object>
-  <object class="GtkWindow" id="Spanish">
-    <property name="width_request">600</property>
-    <property name="height_request">600</property>
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Spanish</property>
-    <property name="resizable">False</property>
-    <property name="default_width">600</property>
-    <property name="default_height">600</property>
-    <child>
-      <object class="GtkLayout" id="layout0">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkEntry" id="entry1">
-            <property name="width_request">275</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="tooltip_text" translatable="yes">click enter for speak</property>
-            <property name="invisible_char">●</property>
-            <property name="shadow_type">etched-in</property>
-            <property name="placeholder_text">spanish</property>
-          </object>
-          <packing>
-            <property name="x">5</property>
-            <property name="y">35</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry2">
-            <property name="width_request">275</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="tooltip_text" translatable="yes">click enter for speak</property>
-            <property name="invisible_char">●</property>
-            <property name="placeholder_text">english</property>
-          </object>
-          <packing>
-            <property name="x">320</property>
-            <property name="y">35</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="b_add">
-            <property name="width_request">20</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">Add words</property>
-            <property name="image">i_plus</property>
-          </object>
-          <packing>
-            <property name="x">285</property>
-            <property name="y">35</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="b_play">
-            <property name="width_request">30</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="image">i_play</property>
-            <property name="always_show_image">True</property>
-          </object>
-          <packing>
-            <property name="x">110</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
-            <property name="width_request">590</property>
-            <property name="height_request">525</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="valign">start</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="x">5</property>
-            <property name="y">70</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="b_open">
-            <property name="width_request">30</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">open dict</property>
-            <property name="image">i_open</property>
-            <property name="always_show_image">True</property>
-          </object>
-          <packing>
-            <property name="x">40</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="b_new">
-            <property name="width_request">30</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="tooltip_text" translatable="yes">create new dict</property>
-            <property name="image">i_new</property>
-            <property name="always_show_image">True</property>
-          </object>
-          <packing>
-            <property name="x">75</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="b_set">
-            <property name="width_request">30</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="image">i_exe</property>
-          </object>
-          <packing>
-            <property name="x">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="c_sort">
-            <property name="width_request">130</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="tooltip_text" translatable="yes">sort</property>
-            <property name="id_column">1</property>
-          </object>
-          <packing>
-            <property name="x">410</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="b_lang1">
-            <property name="label" translatable="yes">es</property>
-            <property name="width_request">25</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="active">True</property>
-          </object>
-          <packing>
-            <property name="x">544</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="b_lang2">
-            <property name="label" translatable="yes">en</property>
-            <property name="width_request">25</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-          </object>
-          <packing>
-            <property name="x">569</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="b_test">
-            <property name="width_request">30</property>
-            <property name="height_request">30</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="receives_default">True</property>
-            <property name="image">i_test</property>
-            <property name="image_position">bottom</property>
-          </object>
-          <packing>
-            <property name="x">145</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkWindow" id="Test">
     <property name="width_request">440</property>
     <property name="height_request">170</property>
@@ -393,7 +181,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
               </object>
               <packing>
                 <property name="x">60</property>
@@ -650,7 +437,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">●</property>
-                <property name="invisible_char_set">True</property>
               </object>
               <packing>
                 <property name="x">5</property>
@@ -710,6 +496,29 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-execute</property>
   </object>
+  <object class="GtkImage" id="i_new">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="tooltip_text" translatable="yes">New dict</property>
+    <property name="stock">gtk-new</property>
+  </object>
+  <object class="GtkImage" id="i_open">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="tooltip_text" translatable="yes">Open dict</property>
+    <property name="stock">gtk-open</property>
+  </object>
+  <object class="GtkImage" id="i_play">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="tooltip_text" translatable="yes">Play/Stop play</property>
+    <property name="stock">gtk-media-play</property>
+  </object>
+  <object class="GtkImage" id="i_plus">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-add</property>
+  </object>
   <object class="GtkImage" id="i_stop">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -719,5 +528,194 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-dialog-warning</property>
+  </object>
+  <object class="GtkWindow" id="Spanish">
+    <property name="width_request">600</property>
+    <property name="height_request">600</property>
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Spanish</property>
+    <property name="resizable">False</property>
+    <property name="default_width">600</property>
+    <property name="default_height">600</property>
+    <child>
+      <object class="GtkLayout" id="layout0">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkEntry" id="entry1">
+            <property name="width_request">275</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">click enter for speak</property>
+            <property name="invisible_char">●</property>
+            <property name="shadow_type">etched-in</property>
+            <property name="placeholder_text">spanish</property>
+          </object>
+          <packing>
+            <property name="x">5</property>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry2">
+            <property name="width_request">275</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="tooltip_text" translatable="yes">click enter for speak</property>
+            <property name="invisible_char">●</property>
+            <property name="placeholder_text">english</property>
+          </object>
+          <packing>
+            <property name="x">321</property>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="b_add">
+            <property name="width_request">20</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Add words</property>
+            <property name="image">i_plus</property>
+          </object>
+          <packing>
+            <property name="x">285</property>
+            <property name="y">35</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="b_play">
+            <property name="width_request">30</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="image">i_play</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="x">110</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="width_request">590</property>
+            <property name="height_request">525</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="x">5</property>
+            <property name="y">70</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="b_open">
+            <property name="width_request">30</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">open dict</property>
+            <property name="image">i_open</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="x">40</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="b_new">
+            <property name="width_request">30</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">create new dict</property>
+            <property name="image">i_new</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="x">75</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="b_set">
+            <property name="width_request">30</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="image">i_exe</property>
+          </object>
+          <packing>
+            <property name="x">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="c_sort">
+            <property name="width_request">130</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="tooltip_text" translatable="yes">sort</property>
+          </object>
+          <packing>
+            <property name="x">395</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="b_lang1">
+            <property name="label" translatable="yes">es</property>
+            <property name="width_request">25</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="x">536</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="b_lang2">
+            <property name="label" translatable="yes">en</property>
+            <property name="width_request">25</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">563</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="b_test">
+            <property name="width_request">30</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="image">i_test</property>
+            <property name="image_position">bottom</property>
+          </object>
+          <packing>
+            <property name="x">145</property>
+          </packing>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>
