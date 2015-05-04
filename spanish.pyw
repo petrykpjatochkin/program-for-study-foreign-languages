@@ -2,6 +2,7 @@
 # This Python file uses the following encoding: utf-8
 from gi.repository import Gtk, Gdk, GObject     # for gui
 import os                                       # for files
+import sys                                      # for command-line arguments
 import urllib2                                  # for google tranlate
 from time import time                           # for logs
 from random import randrange                    # for random
@@ -17,17 +18,16 @@ settings = {"ico_file_name":        main_dir + "spain.png",
             "dict_file_name":       main_dir + "/dicts/English.dict",
             "silence_file_name":    "silence-1sec.mp3",
             "silence_duration":     0,                      # in seconds
+            "repeat":               1,
             "extension":            "dict",
             "langs":                ["es", "en"],
             "win_pos":              [0, 0],
             "revers_lang":          False,
-            "play_status":          False
-}
+            "play_status":          False}
 
-langs = {"es":  "spanish",
-        "en":   "english",
-        "ru":   "russian"
-}
+langs = {"es": "spanish",
+         "en": "english",
+         "ru": "russian"}
 
 
 class MainWin:
@@ -108,9 +108,13 @@ class MainWin:
         settings["langs"] = [text[0].split('||')[0], text[0].split('||')[1]]
 
         try:
-            for dirname in [settings["dict_dir"], settings["sonds_dir"], settings["mp3dict_dir"],
-                            settings["sonds_dir"] + '/' + settings["langs"][0], settings["sonds_dir"] + '/'+settings["langs"][1],
-                            settings["sonds_dir"] + '/' + settings["langs"][0] + '/temp', settings["sonds_dir"] + '/' + settings["langs"][1]+'/temp']:
+            for dirname in [settings["dict_dir"],
+                            settings["sonds_dir"],
+                            settings["mp3dict_dir"],
+                            settings["sonds_dir"] + '/' + settings["langs"][0],
+                            settings["sonds_dir"] + '/' + settings["langs"][1],
+                            settings["sonds_dir"] + '/' + settings["langs"][0] + '/temp',
+                            settings["sonds_dir"] + '/' + settings["langs"][1] + '/temp']:
                 if not os.path.exists(dirname):
                     os.makedirs(dirname)
                     self.log("Create folder: " + dirname)
@@ -139,9 +143,9 @@ class MainWin:
             act = Gtk.FileChooserAction.OPEN
             label = "Open dict"
             button = Gtk.STOCK_OPEN
-        dialog=Gtk.FileChooserDialog(title=label, action=act,
-                                    buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                    button, Gtk.ResponseType.OK))
+        dialog = Gtk.FileChooserDialog(title=label, action=act,
+                                       buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                                button, Gtk.ResponseType.OK))
         dialog.set_current_folder(settings["dict_dir"])
 
         filter_dict = Gtk.FileFilter()
@@ -178,7 +182,10 @@ class MainWin:
         else:
             s = filt.get_text().lower()
             for i in range(len(data)):
-                if data[i][0].lower().find((' ' + s)) != -1 or data[i][1].lower().find(' '+s) != -1 or data[i][0].lower().find(s) == 0 or data[i][1].lower().find(s) == 0:
+                if (data[i][0].lower().find((' ' + s)) != -1 or
+                        data[i][1].lower().find(' ' + s) != -1 or
+                        data[i][0].lower().find(s) == 0 or
+                        data[i][1].lower().find(s) == 0):
                     data[i][-1] = True
                 else:
                     data[i][-1] = False
@@ -231,8 +238,8 @@ class MainWin:
             url = "http://translate.google.com/translate_tts?tl=" + lan + "&q=" + words.replace(" ", "+")
             request = urllib2.Request(url)
             headers = {"Host": "translate.google.com",
-                        "Referer": "http://www.gstatic.com/translate/sound_player2.swf",
-                        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.163 Safari/535.19"}
+                       "Referer": "http://www.gstatic.com/translate/sound_player2.swf",
+                       "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.163 Safari/535.19"}
             request.add_header('User-agent', headers)
             opener = urllib2.build_opener()
 
@@ -261,11 +268,12 @@ class MainWin:
         else:
             mp3_file = open(settings["mp3dict_dir"] + "/" + settings["dict_file_name"].split('/')[-1].split('.')[0] + "-" + settings["langs"][0] + "-" + settings["langs"][1] + ".mp3", 'wb')
         for words in data:
-            for i in range(2):
-                if settings["revers_lang"]:
-                    i = int(not i)
-                mp3_file.write(silence_file * settings["silence_duration"])
-                mp3_file.write(open(self.google_voice(words[i], settings["langs"][i], False), 'rb').read())
+            for j in range(settings["repeat"]):
+                for i in range(2):
+                    if settings["revers_lang"]:
+                        i = int(not i)
+                    mp3_file.write(silence_file * settings["silence_duration"])
+                    mp3_file.write(open(self.google_voice(words[i], settings["langs"][i], False), 'rb').read())
         self.log("Create file: " + mp3_file.name)
         mp3_file.close()
 
@@ -324,10 +332,10 @@ class MainWin:
                 pos = entry.get_position()
             entry.set_text(entry.get_text() + widget.get_label())
             entry.set_position(pos + 1)
-        except Exception,e:
+        except Exception, e:
             self.log(str(e))
 
-#test2------------------------------------------------------------------#
+# test2-----------------------------------------------------------------#
     def data_to_file(self):
         os.remove(settings["dict_file_name"])
         with open(settings["dict_file_name"], 'a') as data_file:
@@ -348,7 +356,7 @@ class MainWin:
             self.e11.get_style_context().remove_class("error")
         except Exception:
             pass
-        self.b11.set_label(self.b11.get_label().split("/")[0] + "/" + str(int(self.b11.get_label().split("/")[1])+1))
+        self.b11.set_label(self.b11.get_label().split("/")[0] + "/" + str(int(self.b11.get_label().split("/")[1]) + 1))
         ans = randrange(len(data)) + 1
         self.say(None, data[ans - 1][int(settings["revers_lang"])], settings["langs"][settings["revers_lang"]], False, False, False)
         self.l14.set_text(str(data[ans - 1][2].count("1")) + "0%")
@@ -358,7 +366,7 @@ class MainWin:
         if Gtk.Buildable.get_name(widget) == "e11" and (e.keyval == 65293 or e.keyval == 65421) and not ans:
             self.test12_start(None)
             return False
-        elif Gtk.Buildable.get_name(widget) == "e11" and (e.keyval==65293 or e.keyval == 65421) and ans and len(self.e11.get_text()) == 0:
+        elif Gtk.Buildable.get_name(widget) == "e11" and (e.keyval == 65293 or e.keyval == 65421) and ans and len(self.e11.get_text()) == 0:
             self.say(None, data[ans - 1][int(settings["revers_lang"])], settings["langs"][settings["revers_lang"]], False, False, False)
             return False
         elif len(self.e11.get_text()) == 0 or not ans or (Gtk.Buildable.get_name(widget) == "e11" and not (e.keyval==65293 or e.keyval==65421)):
@@ -395,7 +403,7 @@ class MainWin:
         except Exception:
             pass
         ans = None
-#test2------------------------------------------------------------------#
+# test2-----------------------------------------------------------------#
 
     def test22_start(self, widget):
         global ans
@@ -410,7 +418,7 @@ class MainWin:
             self.e21.get_style_context().remove_class("error")
         except Exception:
             pass
-        self.b21.set_label(self.b21.get_label().split("/")[0] + "/" + str(int(self.b21.get_label().split("/")[1])+1))
+        self.b21.set_label(self.b21.get_label().split("/")[0] + "/" + str(int(self.b21.get_label().split("/")[1]) + 1))
         ans = randrange(len(data)) + 1
         self.say(None, data[ans - 1][settings["revers_lang"]], settings["langs"][settings["revers_lang"]], False, False, False)
         self.l24.set_text(str(data[ans - 1][2].count("1")) + "0%")
@@ -423,10 +431,10 @@ class MainWin:
         elif Gtk.Buildable.get_name(widget) == "e21" and (e.keyval == 65293 or e.keyval == 65421) and ans and len(self.e21.get_text()) == 0:
             self.say(None, data[ans - 1][not settings["revers_lang"]], settings["langs"][not settings["revers_lang"]], False, False, False)
             return False
-        elif len(self.e21.get_text()) == 0 or not ans or (Gtk.Buildable.get_name(widget) == "e21" and not (e.keyval == 65293 or e.keyval==65421)):
+        elif len(self.e21.get_text()) == 0 or not ans or (Gtk.Buildable.get_name(widget) == "e21" and not (e.keyval == 65293 or e.keyval == 65421)):
             return False
         elif self.e21.get_text().lower() == data[ans - 1][not settings["revers_lang"]].lower() :
-            self.b21.set_label(str(int(self.b21.get_label().split("/")[0]) + 1) + "/"+self.b21.get_label().split("/")[1])
+            self.b21.set_label(str(int(self.b21.get_label().split("/")[0]) + 1) + "/" + self.b21.get_label().split("/")[1])
             data[ans - 1][2] = data[ans - 1][2][1:] + "1"
             self.e21.get_style_context().add_class("ok")
             self.log("OK")
@@ -457,7 +465,7 @@ class MainWin:
         except Exception:
             pass
         ans = None
-#test3------------------------------------------------------------------#
+# test3-----------------------------------------------------------------#
 
     def test32_start(self, widget):
         global ans
@@ -466,7 +474,7 @@ class MainWin:
         ans = randrange(len(data)) + 1
         self.say(None, data[ans - 1][settings["revers_lang"]], settings["langs"][settings["revers_lang"]], False, False, False)
         self.l24.set_text(str(data[ans - 1][2].count("1")) + "0%")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
     def log(self, mesege):
         print "{0:.3f}".format(time() - start_time), ":", mesege
@@ -488,7 +496,7 @@ class MainWin:
 
         self.win1 = self.builder.get_object("Spanish")
         self.win2 = self.builder.get_object("Test")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.b_add = self.builder.get_object("b_add")
         self.b_play = self.builder.get_object("b_play")
         self.b_set = self.builder.get_object("b_set")
@@ -503,7 +511,7 @@ class MainWin:
         self.scrolled_window = self.builder.get_object("scrolledwindow1")
         self.i_play = self.builder.get_object("i_play")
         self.i_stop = self.builder.get_object("i_stop")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.e11 = self.builder.get_object("e11")
         self.b11 = self.builder.get_object("b11")
         self.b12 = self.builder.get_object("b12")
@@ -512,7 +520,7 @@ class MainWin:
         self.l12 = self.builder.get_object("l12")
         self.l13 = self.builder.get_object("l13")
         self.l14 = self.builder.get_object("l14")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.e21 = self.builder.get_object("e21")
         self.b21 = self.builder.get_object("b21")
         self.b22 = self.builder.get_object("b22")
@@ -521,17 +529,17 @@ class MainWin:
         self.l22 = self.builder.get_object("l22")
         self.l23 = self.builder.get_object("l23")
         self.l24 = self.builder.get_object("l24")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.l32 = self.builder.get_object("l32")
         self.b31 = self.builder.get_object("b31")
         self.b32 = self.builder.get_object("b32")
         self.b33 = self.builder.get_object("b33")
         self.b34 = self.builder.get_object("b34")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.l42 = self.builder.get_object("l42")
         self.e41 = self.builder.get_object("e41")
         self.b41 = self.builder.get_object("b41")
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
         self.b_lang1.set_name("b_lang1")
         self.b_lang2.set_name("b_lang2")
@@ -545,7 +553,7 @@ class MainWin:
         self.c_sort.append_text("Randome")
         self.c_sort.set_active(0)
 
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.win1.connect("destroy", self.destroy)
         self.win2.connect("delete_event", self.test)
         self.b_add.connect("clicked", self.add_word)
@@ -561,17 +569,17 @@ class MainWin:
         self.entry1.connect("changed", self.entry_change)
         self.entry2.connect("key-press-event", self.entry_key)
         self.entry2.connect("changed", self.entry_change)
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.e11.connect("key-press-event", self.test12)
         self.b11.connect("clicked", self.test12_restart)
         self.b12.connect("clicked", self.test12_start)
         self.b13.connect("clicked", self.test12, None)
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
         self.e21.connect("key-press-event", self.test22)
         self.b22.connect("clicked", self.test22_start)
         self.b23.connect("clicked", self.test22, None)
         self.b21.connect("clicked", self.test22_restart)
-#-----------------------------------------------------------------------#
+# ----------------------------------------------------------------------#
 
         self.table = Gtk.Table(1, 2, False)
         self.table.set_row_spacings(3)
@@ -586,11 +594,11 @@ class MainWin:
             self.log("no ico file\n\t" + str(e))
 
         try:
-            cssProvider = Gtk.CssProvider()
-            cssProvider.load_from_path('style.css')
+            css_provider = Gtk.CssProvider()
+            css_provider.load_from_path('style.css')
             screen = Gdk.Screen.get_default()
-            styleContext = Gtk.StyleContext()
-            styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+            style_context = Gtk.StyleContext()
+            style_context.add_provider_for_screen(screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         except Exception, e:
             self.log("no css file\n\t " + str(e))
 
@@ -604,17 +612,15 @@ class MainWin:
         self.li2 = Gtk.MenuItem("Open dict")
         self.li3 = Gtk.MenuItem("New dict")
         self.li4 = Gtk.MenuItem("Additional keys")
-        self.li4s = [
-                    Gtk.MenuItem("á"),
-                    Gtk.MenuItem("é"),
-                    Gtk.MenuItem("í"),
-                    Gtk.MenuItem("ó"),
-                    Gtk.MenuItem("ú"),
-                    Gtk.MenuItem("ü"),
-                    Gtk.MenuItem("ñ"),
-                    Gtk.MenuItem("¿"),
-                    Gtk.MenuItem("¡")
-        ]
+        self.li4s = [Gtk.MenuItem("á"),
+                     Gtk.MenuItem("é"),
+                     Gtk.MenuItem("í"),
+                     Gtk.MenuItem("ó"),
+                     Gtk.MenuItem("ú"),
+                     Gtk.MenuItem("ü"),
+                     Gtk.MenuItem("ñ"),
+                     Gtk.MenuItem("¿"),
+                     Gtk.MenuItem("¡")]
         self.li5 = Gtk.MenuItem("Options")
         self.li51 = Gtk.MenuItem("Make mp3dict")
         self.li52 = Gtk.MenuItem("Change lang")
@@ -651,4 +657,5 @@ class MainWin:
         Gtk.main()
 
 if __name__ == "__main__":
+    os.chdir(os.path.dirname(os.path.realpath(__file__)))
     MainWin().main()
