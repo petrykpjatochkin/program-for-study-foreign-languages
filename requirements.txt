@@ -39,7 +39,7 @@ apt-xapian-index==0.45
 Twisted-Names==13.2.0
 pycurl==7.19.3
 zope.interface==4.0.5
-pyxdg==0.25
+pyxdg==0.26
 requests==2.2.1
 numpy==1.8.2
 pycups==1.9.66
