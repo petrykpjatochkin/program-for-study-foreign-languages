@@ -68,7 +68,7 @@ Twisted-Web==13.2.0
 apturl==0.4.1ubuntu4
 pygame==1.9.1release
 piston-mini-client==0.7.5
-httplib2==0.8
+httplib2==0.18.0
 chardet==2.0.1
 colorama==0.2.5
 system-service==0.1.6
