@@ -46,7 +46,7 @@ pycups==1.9.66
 urllib3==1.7.1
 defer==1.0.6
 python-debian==0.1.21-nmu2ubuntu2
-lxml==3.3.3
+lxml==4.6.2
 sessioninstaller==0.0.0
 python-apt==0.9.3.5ubuntu1
 Twisted-Core==13.2.0
